@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Karma - Turn Carbon Reduction Into A Game</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav>
@@ -14,6 +14,8 @@
             <li><a href="#problem">Problem</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#leaderboard">Leaderboard</a></li>
+            <li><a href="#rewards">Rewards</a></li>
+            <li><a href="#donate">Donate</a></li>
             <li><a href="#nepal">For Nepal</a></li>
             <li><a href="#cta">Get Started</a></li>
         </ul>
@@ -25,7 +27,7 @@
             <h1>Turn Carbon Reduction Into A Game</h1>
             <p>Walk instead of drive? Earn points. Beat your friends in sustainability challenges? Climb the leaderboard. We're making it addictive to save the planet, one daily choice at a time.</p>
             <div class="cta-buttons">
-                <a href="#cta" class="btn btn-primary">Join us</a>
+                <a href="#cta" class="btn btn-primary">Download App</a>
                 <a href="#features" class="btn btn-secondary">Learn More</a>
             </div>
             <div class="stats">
@@ -159,6 +161,169 @@
         </div>
     </section>
 
+    <!-- REWARDS & COUPONS SECTION -->
+    <section class="section rewards-section" id="rewards">
+        <div class="rewards-header">
+            <div class="header-icon">🎁</div>
+            <h2 class="section-title">Earn Real Rewards</h2>
+            <p class="section-subtitle">The less carbon you produce, the more you earn. Redeem points for coupons and enjoy free perks!</p>
+        </div>
+
+        <!-- Points Balance Card -->
+        <div class="points-balance-card">
+            <div class="points-icon">⭐</div>
+            <div class="points-content">
+                <h3>Your Carbon Points</h3>
+                <div class="points-amount">2,450 pts</div>
+                <p class="points-desc">Keep reducing carbon to earn more!</p>
+            </div>
+            <div class="points-conversion">
+                <div class="conversion-rate">1 kg CO₂ saved = 10 points</div>
+            </div>
+        </div>
+
+        <!-- Available Coupons -->
+        <h3 class="subsection-title">Available Coupons</h3>
+        <div class="coupons-grid" id="couponsGrid"></div>
+
+        <!-- My Coupons -->
+        <h3 class="subsection-title">My Redeemed Coupons</h3>
+        <div class="my-coupons-section">
+            <div class="my-coupon-card">
+                <div class="coupon-badge">ACTIVE</div>
+                <div class="coupon-code">WALK500</div>
+                <div class="coupon-details">
+                    <h4>Free Bus Ride</h4>
+                    <p>Valid on Sajha Yatayat routes</p>
+                    <div class="coupon-expiry">Expires: Jan 30, 2026</div>
+                </div>
+            </div>
+            <div class="my-coupon-card">
+                <div class="coupon-badge">ACTIVE</div>
+                <div class="coupon-code">ECO250</div>
+                <div class="coupon-details">
+                    <h4>10% Off at Himalayan Java</h4>
+                    <p>Any beverage purchase</p>
+                    <div class="coupon-expiry">Expires: Feb 15, 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DONATION SECTION -->
+    <section class="section donation-section" id="donate">
+        <div class="donation-header">
+            <div class="header-icon">🌳</div>
+            <h2 class="section-title">Plant Trees, Make Impact</h2>
+            <p class="section-subtitle">Pool your points with the community to plant real trees across Nepal. Inspired by Team Trees, powered by Carbon Karma.</p>
+        </div>
+
+        <!-- Current Campaign -->
+        <div class="campaign-card">
+            <div class="campaign-image">🌲🌲🌲</div>
+            <div class="campaign-content">
+                <h3>Nepal Reforestation 2026</h3>
+                <p>Help us plant 10,000 trees across Kathmandu Valley to combat air pollution and restore green spaces.</p>
+                
+                <div class="campaign-progress">
+                    <div class="progress-stats">
+                        <div class="stat">
+                            <span class="stat-number">6,847</span>
+                            <span class="stat-label">Trees Planted</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">3,153</span>
+                            <span class="stat-label">Trees Remaining</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 68.47%"></div>
+                    </div>
+                    <div class="progress-percentage">68% Complete</div>
+                </div>
+
+                <div class="donation-options">
+                    <button class="donate-btn" data-points="100" data-trees="5">
+                        <span class="btn-icon">🌱</span>
+                        <div class="btn-content">
+                            <div class="btn-title">Plant 5 Trees</div>
+                            <div class="btn-cost">100 points</div>
+                        </div>
+                    </button>
+                    <button class="donate-btn" data-points="200" data-trees="10">
+                        <span class="btn-icon">🌳</span>
+                        <div class="btn-content">
+                            <div class="btn-title">Plant 10 Trees</div>
+                            <div class="btn-cost">200 points</div>
+                        </div>
+                    </button>
+                    <button class="donate-btn" data-points="500" data-trees="25">
+                        <span class="btn-icon">🌲</span>
+                        <div class="btn-content">
+                            <div class="btn-title">Plant 25 Trees</div>
+                            <div class="btn-cost">500 points</div>
+                        </div>
+                    </button>
+                    <button class="donate-btn custom-donate">
+                        <span class="btn-icon">✨</span>
+                        <div class="btn-content">
+                            <div class="btn-title">Custom Amount</div>
+                            <div class="btn-cost">Your choice</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Contributors -->
+        <h3 class="subsection-title">Top Contributors This Month</h3>
+        <div class="contributors-grid">
+            <div class="contributor-card">
+                <div class="contributor-rank">🥇</div>
+                <div class="contributor-avatar">DM</div>
+                <div class="contributor-info">
+                    <div class="contributor-name">Deepak Maharjan</div>
+                    <div class="contributor-contribution">850 trees planted</div>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <div class="contributor-rank">🥈</div>
+                <div class="contributor-avatar">MR</div>
+                <div class="contributor-info">
+                    <div class="contributor-name">Mishel Rai</div>
+                    <div class="contributor-contribution">720 trees planted</div>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <div class="contributor-rank">🥉</div>
+                <div class="contributor-avatar">RS</div>
+                <div class="contributor-info">
+                    <div class="contributor-name">Rina Shakya</div>
+                    <div class="contributor-contribution">680 trees planted</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impact Stats -->
+        <div class="impact-stats">
+            <div class="impact-card">
+                <div class="impact-icon">🌍</div>
+                <div class="impact-number">342 tons</div>
+                <div class="impact-label">CO₂ Offset by Trees</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-icon">💧</div>
+                <div class="impact-number">15 locations</div>
+                <div class="impact-label">Planting Sites Active</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-icon">👥</div>
+                <div class="impact-number">1,247</div>
+                <div class="impact-label">Community Members</div>
+            </div>
+        </div>
+    </section>
+
     <section class="section nepal-focus" id="nepal">
         <h2 class="section-title">Built For Nepal</h2>
         <p class="section-subtitle">Tailored specifically for Nepal's unique transportation, culture, and sustainability needs</p>
@@ -188,8 +353,8 @@
 
     <section class="cta-section" id="cta">
         <h2>Ready to Start Your Karma Journey?</h2>
-        <p>Join thousands making sustainability addictive. Join usCarbon Karma today.</p>
-        <a href="#" class="btn btn-primary">Join us now</a>
+        <p>Join thousands making sustainability addictive. Download Carbon Karma today.</p>
+        <a href="#" class="btn btn-primary">Download Now</a>
     </section>
 
     <footer>
