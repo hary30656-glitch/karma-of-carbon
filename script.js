@@ -237,3 +237,356 @@ tabButtons.forEach(btn => {
 
 // Initial render
 renderLeaderboard('all');
+
+// COUPON SYSTEM DATA
+const couponsData = [
+    {
+        id: 1,
+        brand: "Sajha Yatayat",
+        logo: "🚌",
+        title: "Free Bus Ride",
+        description: "Valid on all Sajha Yatayat routes within Kathmandu Valley",
+        points: 150,
+        validity: "Valid for 30 days",
+        available: true
+    },
+    {
+        id: 2,
+        brand: "Himalayan Java",
+        logo: "☕",
+        title: "20% Off Any Beverage",
+        description: "Discount on any coffee, tea, or specialty drink",
+        points: 200,
+        validity: "Valid for 45 days",
+        available: true
+    },
+    {
+        id: 3,
+        brand: "Bhat Bhateni",
+        logo: "🛒",
+        title: "Rs. 500 Off on Groceries",
+        description: "Minimum purchase of Rs. 2000 required",
+        points: 400,
+        validity: "Valid for 60 days",
+        available: true
+    },
+    {
+        id: 4,
+        brand: "Fresh Basket",
+        logo: "🥗",
+        title: "Free Organic Vegetables",
+        description: "Get 1kg of seasonal organic vegetables",
+        points: 300,
+        validity: "Valid for 15 days",
+        available: true
+    },
+    {
+        id: 5,
+        brand: "Daraz",
+        logo: "📦",
+        title: "Rs. 1000 Voucher",
+        description: "Use on any Daraz purchase",
+        points: 800,
+        validity: "Valid for 90 days",
+        available: true
+    },
+    {
+        id: 6,
+        brand: "Pathao",
+        logo: "🛵",
+        title: "3 Free Rides",
+        description: "Worth Rs. 100 each ride",
+        points: 250,
+        validity: "Valid for 30 days",
+        available: true
+    },
+    {
+        id: 7,
+        brand: "Moksh",
+        logo: "🍔",
+        title: "Free Vegan Meal",
+        description: "Any vegan burger or bowl",
+        points: 350,
+        validity: "Valid for 30 days",
+        available: false
+    },
+    {
+        id: 8,
+        brand: "Thamel Eco Resort",
+        logo: "🏨",
+        title: "30% Off Stay",
+        description: "Discount on weekend bookings",
+        points: 600,
+        validity: "Valid for 60 days",
+        available: true
+    }
+];
+
+// Render coupons
+function renderCoupons() {
+    const container = document.getElementById('couponsGrid');
+    container.innerHTML = couponsData.map(coupon => `
+        <div class="coupon-card">
+            <div class="coupon-header">
+                <div class="coupon-brand">
+                    <div class="brand-logo">${coupon.logo}</div>
+                    <div class="brand-name">${coupon.brand}</div>
+                </div>
+                <div class="coupon-points">${coupon.points} pts</div>
+            </div>
+            <h4 class="coupon-title">${coupon.title}</h4>
+            <p class="coupon-description">${coupon.description}</p>
+            <div class="coupon-footer">
+                <span class="coupon-validity">${coupon.validity}</span>
+                <button class="redeem-btn" ${!coupon.available ? 'disabled' : ''} onclick="redeemCoupon(${coupon.id}, ${coupon.points})">
+                    ${coupon.available ? 'Redeem' : 'Out of Stock'}
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// User points (this would come from a database in real app)
+let userPoints = 2450;
+
+// Redeem coupon
+function redeemCoupon(couponId, points) {
+    if (userPoints >= points) {
+        userPoints -= points;
+        updatePointsDisplay();
+        alert(`Coupon redeemed successfully! You now have ${userPoints} points remaining.`);
+        // In a real app, this would save to database and add to user's coupon list
+    } else {
+        alert(`Insufficient points! You need ${points - userPoints} more points to redeem this coupon.`);
+    }
+}
+
+// Update points display
+function updatePointsDisplay() {
+    const pointsElement = document.querySelector('.points-amount');
+    if (pointsElement) {
+        pointsElement.textContent = `${userPoints.toLocaleString()} pts`;
+    }
+}
+
+// Donation buttons
+const donateButtons = document.querySelectorAll('.donate-btn:not(.custom-donate)');
+donateButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const points = parseInt(btn.getAttribute('data-points'));
+        const trees = parseInt(btn.getAttribute('data-trees'));
+        
+        if (userPoints >= points) {
+            const confirmed = confirm(`Donate ${points} points to plant ${trees} trees?`);
+            if (confirmed) {
+                userPoints -= points;
+                updatePointsDisplay();
+                alert(`Thank you! You've donated ${points} points to plant ${trees} trees for Nepal! 🌳`);
+                // In real app, would update campaign progress
+            }
+        } else {
+            alert(`You need ${points - userPoints} more points to make this donation.`);
+        }
+    });
+});
+
+// Custom donation
+const customDonateBtn = document.querySelector('.custom-donate');
+if (customDonateBtn) {
+    customDonateBtn.addEventListener('click', () => {
+        const customPoints = prompt('How many points would you like to donate? (20 points = 1 tree)');
+        if (customPoints && !isNaN(customPoints) && customPoints > 0) {
+            const points = parseInt(customPoints);
+            if (userPoints >= points) {
+                const trees = Math.floor(points / 20);
+                const confirmed = confirm(`Donate ${points} points to plant ${trees} trees?`);
+                if (confirmed) {
+                    userPoints -= points;
+                    updatePointsDisplay();
+                    alert(`Amazing! You've donated ${points} points to plant ${trees} trees! 🌳✨`);
+                }
+            } else {
+                alert(`You need ${points - userPoints} more points to make this donation.`);
+            }
+        }
+    });
+}
+
+// Initialize coupons
+renderCoupons();
+
+// DASHBOARD FEATURES
+
+// Activity Logger
+const activityButtons = document.querySelectorAll('.activity-btn');
+let todayCarbon = 4.2;
+let todayPoints = 42;
+
+activityButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const activity = this.getAttribute('data-activity');
+        const carbonSaved = parseFloat(this.getAttribute('data-carbon'));
+        
+        // Add animation
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 100);
+        
+        // Update stats
+        todayCarbon += carbonSaved;
+        todayPoints += Math.round(carbonSaved * 10);
+        
+        // Update display
+        updateDashboardStats();
+        
+        // Show notification
+        showNotification(`Great! You've logged ${activity} and saved ${carbonSaved}kg CO₂!`);
+    });
+});
+
+function updateDashboardStats() {
+    const carbonElement = document.querySelector('.summary-stats .stat-value');
+    const pointsElements = document.querySelectorAll('.summary-stats .stat-value');
+    
+    if (carbonElement) {
+        carbonElement.textContent = todayCarbon.toFixed(1) + ' kg';
+    }
+    if (pointsElements[1]) {
+        pointsElements[1].textContent = todayPoints + ' pts';
+    }
+}
+
+function showNotification(message) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        z-index: 10000;
+        font-weight: 600;
+        animation: slideIn 0.3s ease-out;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Add animation keyframes
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Carbon Calculator
+function calculateCarbon() {
+    const activity = document.getElementById('calcActivity').value;
+    const distance = parseFloat(document.getElementById('calcDistance').value) || 0;
+    
+    if (distance <= 0) {
+        alert('Please enter a valid distance/quantity');
+        return;
+    }
+    
+    let carbonSaved = 0;
+    let activityName = '';
+    
+    switch(activity) {
+        case 'car':
+            carbonSaved = distance * 0.21; // kg CO2 per km
+            activityName = 'walking instead of driving';
+            break;
+        case 'bike':
+            carbonSaved = distance * 0.08;
+            activityName = 'taking bus instead of motorcycle';
+            break;
+        case 'flight':
+            carbonSaved = distance * 0.15;
+            activityName = 'taking train instead of flying';
+            break;
+        case 'meat':
+            carbonSaved = distance * 2.5; // per meal
+            activityName = 'eating vegan instead of beef';
+            break;
+    }
+    
+    const resultDiv = document.getElementById('calcResult');
+    resultDiv.innerHTML = `
+        <div class="result-icon">🌱</div>
+        <div class="result-text">${carbonSaved.toFixed(2)} kg CO₂ saved!</div>
+        <div class="result-subtext">By ${activityName} ${distance} ${activity === 'meat' ? 'meals' : 'km'}</div>
+    `;
+    resultDiv.style.animation = 'pulse 0.5s ease';
+}
+
+// Simple chart visualization (using canvas)
+const chartCanvas = document.getElementById('weeklyChart');
+if (chartCanvas) {
+    const ctx = chartCanvas.getContext('2d');
+    const width = chartCanvas.parentElement.clientWidth;
+    const height = 200;
+    chartCanvas.width = width;
+    chartCanvas.height = height;
+    
+    // Weekly data (Mon-Sun)
+    const weekData = [3.2, 5.1, 4.8, 6.2, 5.5, 4.9, 4.5];
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    
+    // Draw bars
+    const barWidth = width / 7 - 20;
+    const maxValue = Math.max(...weekData);
+    
+    weekData.forEach((value, i) => {
+        const barHeight = (value / maxValue) * (height - 40);
+        const x = i * (width / 7) + 10;
+        const y = height - barHeight - 20;
+        
+        // Draw bar
+        ctx.fillStyle = '#10b981';
+        ctx.fillRect(x, y, barWidth, barHeight);
+        
+        // Draw value on top
+        ctx.fillStyle = '#1a1a1a';
+        ctx.font = '12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(value + 'kg', x + barWidth/2, y - 5);
+        
+        // Draw day label
+        ctx.fillStyle = '#6b7280';
+        ctx.font = '11px sans-serif';
+        ctx.fillText(days[i], x + barWidth/2, height - 5);
+    });
+}

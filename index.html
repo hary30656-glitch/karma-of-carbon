@@ -11,6 +11,7 @@
         <div class="logo">🌱 Carbon Karma</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#problem">Problem</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#leaderboard">Leaderboard</a></li>
@@ -42,6 +43,187 @@
                 <div class="stat-card">
                     <div class="stat-number">3,247kg</div>
                     <div class="stat-label">Community Impact</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD SECTION -->
+    <section class="section dashboard-section" id="dashboard">
+        <h2 class="section-title">Your Carbon Dashboard</h2>
+        <p class="section-subtitle">Track your daily activities and watch your impact grow</p>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Today's Summary Card -->
+            <div class="dashboard-card summary-card">
+                <div class="card-header">
+                    <h3>Today's Summary</h3>
+                    <span class="date-badge">Jan 20, 2026</span>
+                </div>
+                <div class="summary-stats">
+                    <div class="summary-stat">
+                        <div class="stat-icon-box green">🌱</div>
+                        <div class="stat-info">
+                            <div class="stat-value">4.2 kg</div>
+                            <div class="stat-label">CO₂ Saved</div>
+                        </div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-icon-box blue">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-value">42 pts</div>
+                            <div class="stat-label">Points Earned</div>
+                        </div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-icon-box orange">🔥</div>
+                        <div class="stat-info">
+                            <div class="stat-value">7 days</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Logger Card -->
+            <div class="dashboard-card logger-card">
+                <div class="card-header">
+                    <h3>Log Activity</h3>
+                    <span class="quick-log-badge">Quick Add</span>
+                </div>
+                <div class="activity-buttons">
+                    <button class="activity-btn" data-activity="walk" data-carbon="2.5">
+                        <span class="activity-icon">🚶</span>
+                        <span class="activity-name">Walking</span>
+                        <span class="activity-saving">-2.5kg CO₂</span>
+                    </button>
+                    <button class="activity-btn" data-activity="bus" data-carbon="1.8">
+                        <span class="activity-icon">🚌</span>
+                        <span class="activity-name">Public Transit</span>
+                        <span class="activity-saving">-1.8kg CO₂</span>
+                    </button>
+                    <button class="activity-btn" data-activity="cycle" data-carbon="3.0">
+                        <span class="activity-icon">🚴</span>
+                        <span class="activity-name">Cycling</span>
+                        <span class="activity-saving">-3.0kg CO₂</span>
+                    </button>
+                    <button class="activity-btn" data-activity="meatless" data-carbon="2.0">
+                        <span class="activity-icon">🥗</span>
+                        <span class="activity-name">Meatless Meal</span>
+                        <span class="activity-saving">-2.0kg CO₂</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Weekly Progress Card -->
+            <div class="dashboard-card progress-card">
+                <div class="card-header">
+                    <h3>Weekly Progress</h3>
+                    <span class="progress-badge">68% to Goal</span>
+                </div>
+                <div class="progress-chart">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+                <div class="progress-summary">
+                    <div class="progress-item">
+                        <span class="progress-label">Goal: 50kg CO₂</span>
+                        <span class="progress-value">34kg saved</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Card -->
+            <div class="dashboard-card achievements-card">
+                <div class="card-header">
+                    <h3>Recent Achievements</h3>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+                <div class="achievements-list">
+                    <div class="achievement-item unlocked">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Week Warrior</div>
+                            <div class="achievement-desc">7-day streak!</div>
+                        </div>
+                        <div class="achievement-points">+50 pts</div>
+                    </div>
+                    <div class="achievement-item unlocked">
+                        <div class="achievement-icon">🌟</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Tree Planter</div>
+                            <div class="achievement-desc">Planted 10 trees</div>
+                        </div>
+                        <div class="achievement-points">+100 pts</div>
+                    </div>
+                    <div class="achievement-item locked">
+                        <div class="achievement-icon">🔒</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Carbon Hero</div>
+                            <div class="achievement-desc">Save 100kg CO₂</div>
+                        </div>
+                        <div class="achievement-progress">78/100</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Challenges Card -->
+            <div class="dashboard-card challenges-card">
+                <div class="card-header">
+                    <h3>Active Challenges</h3>
+                    <span class="challenge-count">2 Active</span>
+                </div>
+                <div class="challenges-list">
+                    <div class="challenge-item">
+                        <div class="challenge-info">
+                            <div class="challenge-name">🥗 Meatless Monday</div>
+                            <div class="challenge-desc">Go meatless for 3 meals</div>
+                        </div>
+                        <div class="challenge-progress-bar">
+                            <div class="challenge-progress-fill" style="width: 66%"></div>
+                        </div>
+                        <div class="challenge-status">2/3 complete</div>
+                    </div>
+                    <div class="challenge-item">
+                        <div class="challenge-info">
+                            <div class="challenge-name">🚶 Walk 10K Steps</div>
+                            <div class="challenge-desc">Daily step challenge</div>
+                        </div>
+                        <div class="challenge-progress-bar">
+                            <div class="challenge-progress-fill" style="width: 42%"></div>
+                        </div>
+                        <div class="challenge-status">4,200/10,000 steps</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carbon Calculator Card -->
+            <div class="dashboard-card calculator-card">
+                <div class="card-header">
+                    <h3>Carbon Calculator</h3>
+                    <span class="calculator-badge">Estimate Impact</span>
+                </div>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label>Activity Type</label>
+                        <select id="calcActivity" class="form-control">
+                            <option value="car">Car (vs Walking)</option>
+                            <option value="bike">Motorcycle (vs Bus)</option>
+                            <option value="flight">Flight (vs Train)</option>
+                            <option value="meat">Beef Meal (vs Vegan)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Distance/Quantity</label>
+                        <input type="number" id="calcDistance" class="form-control" placeholder="Enter value" value="10">
+                    </div>
+                    <button class="calc-btn" onclick="calculateCarbon()">
+                        <span>Calculate Savings</span>
+                    </button>
+                    <div class="calc-result" id="calcResult">
+                        <div class="result-icon">🌍</div>
+                        <div class="result-text">Enter details to calculate</div>
+                    </div>
                 </div>
             </div>
         </div>
